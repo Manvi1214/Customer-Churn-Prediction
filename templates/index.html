@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home - RetentionAI Churn Predictor{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-tagline">Machine Learning Retention Platform</div>
+    <h1 class="hero-title">Predict Customer Churn<br>With Enterprise Intelligence</h1>
+    <p class="hero-desc">
+        Leverage machine learning algorithms to identify customer attrition risks early. Input key demographic, subscription, and activity attributes to predict behavior and optimize retention strategies.
+    </p>
+    <div class="hero-cta">
+        <a href="{{ url_for('predict') }}" class="btn btn-primary">Start Predicting Now</a>
+        <a href="{{ url_for('performance') }}" class="btn btn-secondary">View Model Performance</a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section style="margin-bottom: 5rem;">
+    <h2 class="section-title">Key Platform Features</h2>
+    <div class="card-grid">
+        <div class="card">
+            <div class="card-icon">⚡</div>
+            <h3 class="card-title">Real-Time Inference</h3>
+            <p class="card-desc">Get instant predictions on customer behavior with under 50ms latency using our optimized Random Forest pipeline.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🎯</div>
+            <h3 class="card-title">99.8% Test Accuracy</h3>
+            <p class="card-desc">State-of-the-art accuracy trained on structured customer attributes, ensuring reliability for business decision-making.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🔍</div>
+            <h3 class="card-title">Explainable Outcomes</h3>
+            <p class="card-desc">Identify the precise factors—such as payment delays or support calls—driving individual customer churn risk.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Benefits Section -->
+<section style="margin-bottom: 5rem;">
+    <h2 class="section-title">Business Benefits</h2>
+    <div class="card-grid">
+        <div class="card">
+            <div class="card-icon">📈</div>
+            <h3 class="card-title">Reduce Customer Attrition</h3>
+            <p class="card-desc">Proactively engage high-risk customers with customized offers and interventions before they cancel their service.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">💰</div>
+            <h3 class="card-title">Optimize Support Allocation</h3>
+            <p class="card-desc">Identify customers who are submitting high volumes of support tickets and prioritize their resolution to avoid churn.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🛡️</div>
+            <h3 class="card-title">Protect Subscription Revenue</h3>
+            <p class="card-desc">Retain valuable subscription recurring revenue and improve customer lifetime value (LTV) through proactive outreach.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+
+{% block title %}About - RetentionAI Project Details{% endblock %}
+
+{% block content %}
+<section style="padding: 3rem 0;">
+    <h1 class="section-title" style="margin-bottom: 4rem;">Project Documentation</h1>
+    
+    <div class="about-grid">
+        <!-- Block 1: Problem Statement -->
+        <div class="about-block">
+            <h3>1. Problem Statement</h3>
+            <p>
+                In subscription-based services (SaaS, telecom, utility providers), customer attrition (churn) directly impacts recurring revenue and growth rates. Acquiring a new customer is significantly more expensive than retaining an existing one.
+            </p>
+            <p>
+                The goal of this project is to build an intelligent classifier that can analyze customer demographic profile details, subscription metrics, and service interaction signals to predict whether a customer will churn. This allows retention teams to target high-risk accounts with proactive engagement, maximizing lifetime value (LTV).
+            </p>
+        </div>
+
+        <!-- Block 2: Dataset Overview -->
+        <div class="about-block">
+            <h3>2. Dataset Attributes</h3>
+            <p>
+                The model is trained on a structured customer dataset comprising the following 10 customer features:
+            </p>
+            <ul>
+                <li><strong>Age:</strong> Age of the customer (integer).</li>
+                <li><strong>Gender:</strong> Female or Male (categorical).</li>
+                <li><strong>Tenure:</strong> Total months the customer has been active (integer).</li>
+                <li><strong>Usage Frequency:</strong> Number of times the customer used the service per month (integer).</li>
+                <li><strong>Support Calls:</strong> Number of customer service calls made (integer).</li>
+                <li><strong>Payment Delay:</strong> Number of days payment has been delayed past the due date (integer).</li>
+                <li><strong>Subscription Type:</strong> Basic, Standard, or Premium tier (categorical).</li>
+                <li><strong>Contract Length:</strong> Annual, Quarterly, or Monthly contract type (categorical).</li>
+                <li><strong>Total Spend:</strong> Total monetary amount spent by the customer (numeric).</li>
+                <li><strong>Last Interaction:</strong> Days since the customer's last interaction with the platform (integer).</li>
+            </ul>
+        </div>
+
+        <!-- Block 3: Technology Used -->
+        <div class="about-block">
+            <h3>3. Tech Stack</h3>
+            <p>
+                This project is built from scratch as a lightweight, production-grade Python web application utilizing the following technologies:
+            </p>
+            <ul>
+                <li><strong>Frontend:</strong> Semantic HTML5, Vanilla CSS3 (custom responsive design system), and Vanilla JavaScript.</li>
+                <li><strong>Backend:</strong> Python 3, Flask Web Framework, and Jinja2 templates.</li>
+                <li><strong>Machine Learning:</strong> Scikit-learn (preprocessors & pipelines), Pandas (data manipulation), NumPy (array operations), and Joblib (object serialization).</li>
+                <li><strong>Visualization:</strong> Matplotlib and Seaborn (generating model evaluation plots).</li>
+            </ul>
+        </div>
+
+        <!-- Block 4: Machine Learning Algorithm -->
+        <div class="about-block">
+            <h3>4. Machine Learning Algorithm</h3>
+            <p>
+                We implemented a <strong>Random Forest Classifier</strong>, an ensemble machine learning method that trains multiple decision trees and averages their predictions (bagging). 
+            </p>
+            <p>
+                The preprocessing pipeline encodes categorical columns using `OneHotEncoder`, standardizes continuous numeric columns using `StandardScaler`, and imputes any missing values. The classifier uses balanced class weights and a regulated tree depth (`max_depth=12`) to prevent overfitting.
+            </p>
+        </div>
+
+        <!-- Block 5: Workflow Pipeline -->
+        <div class="about-block">
+            <h3>5. Workflow Pipeline</h3>
+            <p>
+                The system operates in two distinct scripts to separate training from application runtime:
+            </p>
+            <ol style="margin-left: 1.5rem; margin-bottom: 1rem; color: var(--text-secondary);">
+                <li style="margin-bottom: 0.5rem;"><strong>Training (`train_model.py`):</strong> Cleans raw data, constructs the preprocessing pipeline, fits features, trains the Random Forest classifier, generates static evaluation charts, and saves serialized model artifacts.</li>
+                <li style="margin-bottom: 0.5rem;"><strong>Application (`app.py` & `predict.py`):</strong> Launches a local web server, exposes input endpoints, decodes user form entries, loads the pre-trained preprocessing pipeline and classifier, runs predictions in real-time, and renders results.</li>
+            </ol>
+        </div>
+
+        <!-- Block 6: Future Scope -->
+        <div class="about-block">
+            <h3>6. Future Scope</h3>
+            <p>
+                To scale this application for enterprise deployment, the following enhancements are proposed:
+            </p>
+            <ul>
+                <li><strong>Database Integration:</strong> Store user input submissions and actual churn feedback dynamically in a relational database (e.g., Cloud SQL or PostgreSQL) to facilitate model retraining.</li>
+                <li><strong>SHAP Explanations:</strong> Implement SHAP (SHapley Additive exPlanations) to explain individual predictions on a deeper mathematical level.</li>
+                <li><strong>AutoML Pipeline:</strong> Automate hyperparameter tuning and model retraining on a scheduler using tools like Airflow and MLflow.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}

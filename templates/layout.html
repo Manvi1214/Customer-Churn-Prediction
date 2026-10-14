@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}RetentionAI - Customer Churn Prediction{% endblock %}</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Favicon placeholder or subtle emoji -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22 width=%22100%22 height=%22100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="{{ url_for('home') }}" class="nav-logo">
+                <span>✦</span> RetentionAI
+            </a>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a></li>
+                <li><a href="{{ url_for('about') }}" class="nav-link {% if request.path == '/about' %}active{% endif %}">About Project</a></li>
+                <li><a href="{{ url_for('performance') }}" class="nav-link {% if request.path == '/performance' %}active{% endif %}">Model Performance</a></li>
+                <li><a href="{{ url_for('predict') }}" class="btn-nav-predict">Predict Churn</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="container">
+        <!-- Flask Flash Error Messages -->
+        {% with messages = get_flashed_messages(category_filter=["error"]) %}
+            {% if messages %}
+                <div class="alerts" style="margin-top: 2rem;">
+                    {% for msg in messages %}
+                        <div class="alert alert-error">
+                            <span>⚠️</span> {{ msg }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <a href="{{ url_for('home') }}" class="footer-logo">✦ RetentionAI</a>
+            <ul class="footer-links">
+                <li><a href="{{ url_for('home') }}" class="footer-link">Home</a></li>
+                <li><a href="{{ url_for('about') }}" class="footer-link">About</a></li>
+                <li><a href="{{ url_for('performance') }}" class="footer-link">Performance</a></li>
+                <li><a href="{{ url_for('predict') }}" class="footer-link">Prediction Tool</a></li>
+            </ul>
+            <p>&copy; 2026 RetentionAI Project. Built with Flask, Scikit-learn, and Vanilla CSS for Internship Submission.</p>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

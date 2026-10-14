@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+
+{% block title %}Result - Predictive Outcome{% endblock %}
+
+{% block content %}
+<section style="padding: 3rem 0; max-width: 800px; margin: 0 auto;">
+    <h1 class="section-title">Prediction Result</h1>
+    
+    <!-- Calculate outcome confidence -->
+    {% if prediction == 1 %}
+        {% set outcome_label = "Customer Will Churn" %}
+        {% set confidence_pct = probability * 100 %}
+        {% set card_class = "churn" %}
+        {% set badge_text = "High Risk Alert" %}
+    {% else %}
+        {% set outcome_label = "Customer Will Stay" %}
+        {% set confidence_pct = (1 - probability) * 100 %}
+        {% set card_class = "stay" %}
+        {% set badge_text = "Low Risk / Loyal" %}
+    {% endif %}
+    
+    <!-- Main Result Card -->
+    <div class="result-card {{ card_class }}">
+        <div class="result-badge">{{ badge_text }}</div>
+        <h2>{{ outcome_label }}</h2>
+        
+        <div class="result-prob-container">
+            <div class="result-prob-label">Prediction Confidence</div>
+            <div class="result-prob-val">{{ "%.2f"|format(confidence_pct) }}%</div>
+            
+            <div class="progress-bar-bg">
+                <div class="progress-bar" style="width: {{ confidence_pct }}%;"></div>
+            </div>
+            
+            <p class="card-desc" style="margin-top: 1rem;">
+                {% if prediction == 1 %}
+                    Our machine learning model has identified risk signals. There is a <strong>{{ "%.2f"|format(probability * 100) }}%</strong> probability that this customer will churn.
+                {% else %}
+                    This customer exhibits positive retention behavior. Churn probability is extremely low at <strong>{{ "%.2f"|format(probability * 100) }}%</strong>.
+                {% endif %}
+            </p>
+        </div>
+        
+        <!-- Top Influential Features -->
+        <div class="importance-list">
+            <h4 class="importance-list-title">Top 5 Influential Factors (Global Model Weight)</h4>
+            {% for feature in top_features %}
+                <div class="importance-item">
+                    <span class="importance-name">{{ feature.name }}</span>
+                    <span class="importance-val">{{ "%.2f"|format(feature.importance * 100) }}%</span>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Actions & Interventions -->
+        <div style="margin-top: 2rem;">
+            {% if prediction == 1 %}
+                <p class="card-desc" style="margin-bottom: 1.5rem;">
+                    <strong>Recommended Interventions:</strong> Consider offering a subscription discount, scheduling a proactive account review call, or shifting the customer from a monthly to an annual contract.
+                </p>
+            {% else %}
+                <p class="card-desc" style="margin-bottom: 1.5rem;">
+                    <strong>Recommended Actions:</strong> No immediate retention intervention needed. Consider cross-selling premium add-on services or inviting the customer to a loyalty rewards program.
+                </p>
+            {% endif %}
+            
+            <div style="display: flex; justify-content: center; gap: 1rem;">
+                <a href="{{ url_for('predict') }}" class="btn btn-primary">Analyze Another Customer</a>
+                <a href="{{ url_for('home') }}" class="btn btn-secondary">Go to Home</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block title %}Performance - Model Evaluation Metrics{% endblock %}
+
+{% block content %}
+<section style="padding: 3rem 0;">
+    <h1 class="section-title">Model Performance Dashboard</h1>
+    
+    <!-- Metrics Grid -->
+    <div class="metrics-grid">
+        <div class="metric-card accent">
+            <div class="metric-label">Accuracy Score</div>
+            <div class="metric-value">{{ metrics.accuracy }}</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Precision Score</div>
+            <div class="metric-value">{{ metrics.precision }}</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Recall Score</div>
+            <div class="metric-value">{{ metrics.recall }}</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">F1-Score</div>
+            <div class="metric-value">{{ metrics.f1_score }}</div>
+        </div>
+    </div>
+    
+    <!-- Evaluation Charts Grid -->
+    <div class="graphs-container">
+        <!-- Chart 1: Confusion Matrix -->
+        <div class="graph-card">
+            <h3 class="graph-title">Confusion Matrix</h3>
+            <img src="{{ url_for('static', filename='graphs/confusion_matrix.png') }}" alt="Confusion Matrix" class="graph-img">
+            <p class="card-desc" style="margin-top: 1rem; text-align: left;">
+                The confusion matrix shows the classifier's performance by comparing predicted versus actual labels. High values on the diagonal represent correct classifications (true negatives and true positives).
+            </p>
+        </div>
+        
+        <!-- Chart 2: ROC Curve -->
+        <div class="graph-card">
+            <h3 class="graph-title">Receiver Operating Characteristic (ROC) Curve</h3>
+            <img src="{{ url_for('static', filename='graphs/roc_curve.png') }}" alt="ROC Curve" class="graph-img">
+            <p class="card-desc" style="margin-top: 1rem; text-align: left;">
+                The ROC Curve plots the True Positive Rate against the False Positive Rate at various classification thresholds. The Area Under the Curve (AUC) indicates how well the model separates the two classes.
+            </p>
+        </div>
+        
+        <!-- Chart 3: Feature Importance -->
+        <div class="graph-card" style="grid-column: span 2;">
+            <h3 class="graph-title">Model Feature Importances</h3>
+            <img src="{{ url_for('static', filename='graphs/feature_importance.png') }}" alt="Feature Importance" class="graph-img">
+            <p class="card-desc" style="margin-top: 1rem; text-align: left;">
+                The feature importance graph lists which variables had the most weight in the Random Forest model's splits. Features like <strong>Payment Delay</strong> and <strong>Support Calls</strong> are key risk signals for churn.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}
